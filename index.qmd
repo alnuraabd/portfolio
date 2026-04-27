@@ -1,0 +1,5 @@
+# Welcome
+
+Hi, I am Alnura.
+
+This is my data science portfolio.
