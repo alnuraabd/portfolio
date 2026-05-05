@@ -138,134 +138,180 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<!-- creating centered intro section -->
 <div style="text-align: center; margin: 60px 0 20px 0;">
-<!-- displaying profile image as circle -->
-<p><img src="images/horse_pic.jpg" alt="My Spirit Animal" style="width: 200px; height: 200px; border-radius: 50%; object-fit: cover; box-shadow: 0 4px 12px rgba(0,0,0,0.15);"></p>
-<!-- showing name -->
-<h1 style="margin-top: 20px;">
-Hi, I’m Alnura
-</h1>
-<!-- showing short description -->
+
+<img src="images/horse_pic.jpg" alt="My Spirit Animal" style="width: 200px; height: 200px; border-radius: 50%; object-fit: cover; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+
+<h1 style="margin-top: 20px;">Hi, I'm Alnura</h1>
+
 <p style="font-size: 1.2em; color: #555; max-width: 600px; margin: 0 auto;">
-3rd year Data Science student at CEU. I wrangle data, cook questionable meals, and spiritually identify as a horse. Welcome to my corner of the internet.
+3rd year Data Science student at CEU. I wrangle data, cook questionable meals,
+and spiritually identify as a horse. Welcome to my corner of the internet.
 </p>
+
 </div>
+
 <hr>
-<!-- loading hidden youtube player -->
+
 <iframe id="yt-player" src="https://www.youtube.com/embed/pRpeEdMmmQ0?enablejsapi=1&amp;controls=0&amp;autoplay=0" style="display:none;" allow="autoplay">
 </iframe>
-<!-- creating custom music player -->
+
 <div style="max-width: 380px; margin: 30px auto; background: #1e1e2e; border-radius: 20px; padding: 24px; box-shadow: 0 8px 32px rgba(0,0,0,0.3); color: white; font-family: monospace;">
-<!-- showing song info -->
-<div style="text-align:center; margin-bottom: 16px;">
-<pre><code>&lt;div style="font-size: 0.75em; color: #888;"&gt;NOW PLAYING&lt;/div&gt;
-&lt;div style="font-size: 1.1em; font-weight: bold;"&gt;Waka Waka&lt;/div&gt;
-&lt;div style="font-size: 0.85em; color: #aaa;"&gt;Shakira&lt;/div&gt;</code></pre>
+
+  <div style="text-align:center; margin-bottom: 16px;">
+    <div style="font-size: 0.75em; color: #888; letter-spacing: 2px;">NOW PLAYING</div>
+    <div style="font-size: 1.1em; font-weight: bold; margin-top: 6px;">Waka Waka</div>
+    <div style="font-size: 0.85em; color: #aaa;">Shakira</div>
+  </div>
+
+  <div style="background:#333; border-radius: 999px; height: 6px; margin: 16px 0; cursor:pointer;" onclick="seekSong(event, this)">
+    <div id="progress-bar" style="background: linear-gradient(90deg, #a78bfa, #ec4899); width: 0%; height: 100%; border-radius: 999px; transition: width 0.5s;"></div>
+  </div>
+
+  <div style="display:flex; justify-content: space-between; font-size:0.75em; color:#888; margin-bottom: 16px;">
+    <span id="current-time">0:00</span>
+    <span>3:33</span>
+  </div>
+
+  <div style="display:flex; justify-content:center; align-items:center; gap: 24px;">
+    <button onclick="restartSong()" style="background:none; border:none; color:white; font-size:1.4em; cursor:pointer;">⏮</button>
+    <button id="play-btn" onclick="togglePlay()" style="background: linear-gradient(135deg, #a78bfa, #ec4899); border:none; color:white; 
+             width:54px; height:54px; border-radius:50%; font-size:1.4em; cursor:pointer;
+             box-shadow: 0 4px 15px rgba(167,139,250,0.4);">
+      ▶
+    </button>
+    <button onclick="muteSong()" id="mute-btn" style="background:none; border:none; color:white; font-size:1.4em; cursor:pointer;">🔊</button>
+  </div>
+
 </div>
-<!-- showing progress bar -->
-<div style="background:#333; border-radius: 999px; height: 6px; margin: 16px 0; cursor:pointer;" onclick="seekSong(event, this)">
-<pre><code>&lt;div id="progress-bar" style="background: linear-gradient(90deg, #a78bfa, #ec4899); width: 0%; height: 100%; border-radius: 999px;"&gt;&lt;/div&gt;</code></pre>
-</div>
-<!-- showing time -->
-<div style="display:flex; justify-content: space-between; font-size:0.75em; color:#888;">
-<pre><code>&lt;span id="current-time"&gt;0:00&lt;/span&gt;
-&lt;span&gt;3:33&lt;/span&gt;</code></pre>
-</div>
-<!-- showing control buttons -->
-<div style="display:flex; justify-content:center; gap: 24px;">
-<pre><code>&lt;button onclick="restartSong()"&gt;⏮&lt;/button&gt;
-&lt;button id="play-btn" onclick="togglePlay()"&gt;▶&lt;/button&gt;
-&lt;button onclick="muteSong()" id="mute-btn"&gt;🔊&lt;/button&gt;</code></pre>
-</div>
-</div>
+
 <hr>
-<!-- creating skills section -->
-<h2 class="anchored">
-What I Do
-</h2>
-<div style="display: flex; gap: 30px; flex-wrap: wrap;">
-<!-- python card -->
-<div style="background:#f8f9fa; padding: 20px; border-radius: 12px;">
-<pre><code>&lt;h3&gt;Python&lt;/h3&gt;
-&lt;p&gt;Using python for data work and analysis.&lt;/p&gt;</code></pre>
+
+<h2 class="anchored">What I Do</h2>
+
+<div style="display: flex; gap: 30px; margin: 20px 0; flex-wrap: wrap;">
+
+  <div style="background:#f8f9fa; padding: 20px; border-radius: 12px; flex: 1; min-width: 200px;">
+    <h3 class="anchored">Python</h3>
+    <p>I use Python the way most people use Google Maps — sometimes I know where I'm going, sometimes I just trust the process and hope for the best.</p>
+  </div>
+
+  <div style="background:#f8f9fa; padding: 20px; border-radius: 12px; flex: 1; min-width: 200px;">
+    <h3 class="anchored">Data Visualization</h3>
+    <p>Turning spreadsheets into something a human actually wants to look at. Charts, dashboards, the works.</p>
+  </div>
+
+  <div style="background:#f8f9fa; padding: 20px; border-radius: 12px; flex: 1; min-width: 200px;">
+    <h3 class="anchored">Cooking</h3>
+    <p>Same energy as data work — follow the recipe, improvise halfway through, explain the results confidently regardless of outcome.</p>
+  </div>
+
 </div>
-<!-- visualization card -->
-<div style="background:#f8f9fa; padding: 20px; border-radius: 12px;">
-<pre><code>&lt;h3&gt;Data Visualization&lt;/h3&gt;
-&lt;p&gt;Creating charts and dashboards.&lt;/p&gt;</code></pre>
-</div>
-<!-- cooking card -->
-<div style="background:#f8f9fa; padding: 20px; border-radius: 12px;">
-<pre><code>&lt;h3&gt;Cooking&lt;/h3&gt;
-&lt;p&gt;Experimenting and explaining results.&lt;/p&gt;</code></pre>
-</div>
-</div>
+
 <hr>
-<!-- creating projects section -->
-<h2 class="anchored">
-Featured Projects
-</h2>
-<div style="display: flex; gap: 30px; flex-wrap: wrap;">
-<!-- project card -->
-<div style="background:#f8f9fa; padding: 20px; border-radius: 12px;">
-<pre><code>&lt;strong&gt;Computer Games Industry Analysis&lt;/strong&gt;
-&lt;p&gt;Analyzing gaming trends.&lt;/p&gt;
-&lt;a href="projects.qmd"&gt;View Project&lt;/a&gt;</code></pre>
+
+<h2 class="anchored">Featured Projects</h2>
+
+<div style="display: flex; gap: 30px; margin: 20px 0; flex-wrap: wrap;">
+
+  <div style="background:#f8f9fa; padding: 20px; border-radius: 12px; flex: 1; min-width: 200px;">
+    <strong>Computer Games Industry Analysis</strong>
+    <p>Exploring 70,000+ Steam games to understand how real-world events shape gaming trends.</p>
+    <a href="./projects.html">View Project</a>
+  </div>
+
+  <div style="background:#f8f9fa; padding: 20px; border-radius: 12px; flex: 1; min-width: 200px;">
+    <strong>Democracy and Economic Perception</strong>
+    <p>Do people judge democracy by GDP numbers or by how their wallet actually feels? Spoiler: the vibes win.</p>
+    <a href="./projects.html">View Project</a>
+  </div>
+
 </div>
-<!-- project card -->
-<div style="background:#f8f9fa; padding: 20px; border-radius: 12px;">
-<pre><code>&lt;strong&gt;Democracy and Economic Perception&lt;/strong&gt;
-&lt;p&gt;Analyzing perception vs economy.&lt;/p&gt;
-&lt;a href="projects.qmd"&gt;View Project&lt;/a&gt;</code></pre>
-</div>
-</div>
+
 <hr>
+
+<p>Find me here: <a href="https://linkedin.com/in/alnura-abdyrova">LinkedIn</a> · <a href="https://github.com/alnuraabd">GitHub</a></p>
+
 <script>
-  // initializing player state
   var player;
   var isPlaying = false;
   var isMuted = false;
+  var progressInterval;
+  var totalSeconds = 213;
 
-  // loading youtube api
   var tag = document.createElement('script');
   tag.src = "https://www.youtube.com/iframe_api";
   document.head.appendChild(tag);
 
-  // creating player
   function onYouTubeIframeAPIReady() {
-    player = new YT.Player('yt-player');
+    player = new YT.Player('yt-player', {
+      events: { 'onStateChange': onPlayerStateChange }
+    });
   }
 
-  // toggling play and pause
+  function onPlayerStateChange(event) {
+    if (event.data === YT.PlayerState.ENDED) {
+      isPlaying = false;
+      document.getElementById('play-btn').innerHTML = '&#9654;';
+      clearInterval(progressInterval);
+    }
+  }
+
   function togglePlay() {
     if (!player) return;
     if (isPlaying) {
       player.pauseVideo();
       isPlaying = false;
+      document.getElementById('play-btn').innerHTML = '&#9654;';
+      clearInterval(progressInterval);
     } else {
       player.playVideo();
       isPlaying = true;
+      document.getElementById('play-btn').innerHTML = '&#9646;&#9646;';
+      startProgress();
     }
   }
 
-  // restarting song
   function restartSong() {
     if (!player) return;
     player.seekTo(0);
     player.playVideo();
+    isPlaying = true;
+    document.getElementById('play-btn').innerHTML = '&#9646;&#9646;';
+    startProgress();
   }
 
-  // muting and unmuting
   function muteSong() {
     if (!player) return;
     if (isMuted) {
       player.unMute();
       isMuted = false;
+      document.getElementById('mute-btn').innerHTML = '&#128266;';
     } else {
       player.mute();
       isMuted = true;
+      document.getElementById('mute-btn').innerHTML = '&#128263;';
     }
+  }
+
+  function startProgress() {
+    clearInterval(progressInterval);
+    progressInterval = setInterval(function() {
+      if (!player || !player.getCurrentTime) return;
+      var current = player.getCurrentTime();
+      var pct = (current / totalSeconds) * 100;
+      document.getElementById('progress-bar').style.width = pct + '%';
+      var mins = Math.floor(current / 60);
+      var secs = Math.floor(current % 60);
+      document.getElementById('current-time').innerHTML = mins + ':' + (secs < 10 ? '0' : '') + secs;
+    }, 500);
+  }
+
+  function seekSong(event, bar) {
+    if (!player) return;
+    var rect = bar.getBoundingClientRect();
+    var pct = (event.clientX - rect.left) / rect.width;
+    player.seekTo(pct * totalSeconds);
   }
 </script>
 

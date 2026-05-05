@@ -1,67 +1,76 @@
-# data.py
 
-# importing project classes
+# importing project classes from models and base Project class for type checking
 from models import DashboardProject, ProductProject, VisualProject, Project
 
 
-# defining portfolio container class
 class Portfolio:
-    """Container class for all portfolio projects."""
+    """
+    Container class managing all portfolio projects.
+    
+    Demonstrates:
+    - Encapsulation: projects stored privately, exposed via iteration
+    - Dunder methods: __iter__, __len__, __repr__ make it behave like a collection
+    """
 
-    # initializing portfolio with owner name and empty project list
     def __init__(self, owner_name):
+        # storing owner name via setter so validation runs immediately
         self.owner_name = owner_name
+        # storing projects as private list — not accessible directly from outside
         self._projects = []
 
-    # validating and setting owner name
     @property
     def owner_name(self):
         return self._owner_name
 
     @owner_name.setter
     def owner_name(self, value):
+        # validating that owner name is a non-empty string
         if not value or not isinstance(value, str):
             raise ValueError("Owner name must be a non-empty string")
         self._owner_name = value.strip()
 
-    # adding project to portfolio
     def add_project(self, project):
-        # checking project type
+        """Adding a project — only accepting Project instances."""
+        # enforcing type safety — only real Project subclasses allowed
         if not isinstance(project, Project):
             raise TypeError(f"Expected a Project instance, got {type(project).__name__}")
         self._projects.append(project)
-        return self  # allowing method chaining
+        # returning self to allow method chaining: portfolio.add_project(...).add_project(...)
+        return self
 
-    # filtering projects by type (e.g. DashboardProject)
     def get_by_type(self, project_type):
+        """Returning only projects matching a specific subclass type."""
+        # filtering projects by type using isinstance (polymorphism awareness)
         return [p for p in self._projects if isinstance(p, project_type)]
 
-    # enabling iteration over portfolio
     def __iter__(self):
+        """Making Portfolio directly iterable — enables: for project in portfolio."""
         return iter(self._projects)
 
-    # returning number of projects
     def __len__(self):
+        """Making len(portfolio) work like a list."""
         return len(self._projects)
 
-    # returning debug representation
     def __repr__(self):
+        """Returning developer-friendly string representation."""
         return f"Portfolio(owner='{self.owner_name}', projects={len(self._projects)})"
 
-    # exporting portfolio to qmd file
     def export_qmd(self, filepath="generated_projects.qmd"):
+        """Exporting all projects to a .qmd file — replaces generate_projects.py."""
         with open(filepath, "w") as f:
             f.write(f"# {self.owner_name}'s Projects\n\n")
+            # calling render_markdown() on each project — polymorphism in action
             for project in self._projects:
                 f.write(project.render_markdown())
         print(f"Exported {len(self._projects)} projects to {filepath}")
 
 
-# building portfolio instance
+# --- building the portfolio ---
+
+# instantiating Portfolio with owner name
 portfolio = Portfolio(owner_name="Alnura Abdyrova")
 
-
-# adding dashboard project
+# adding DashboardProject — extends Project with embedded Tableau dashboard
 portfolio.add_project(DashboardProject(
     title="Computer Games Industry Analysis",
     description="Analysis of gaming trends using Steam data",
@@ -78,34 +87,33 @@ portfolio.add_project(DashboardProject(
     ],
     tools=["Tableau", "Python"],
     dashboard_link="https://public.tableau.com/views/Book1_17653119185000/Dashboard3?:showVizHome=no&:embed=true"
-))
-
-
-# adding visual analysis project
-portfolio.add_project(VisualProject(
+# chaining add_project — returns self so next call can be added directly
+)).add_project(VisualProject(
     title="Democracy and Economic Perception",
     description="Do people judge democracy by GDP numbers or by how their wallet actually feels? "
                 "Using World Values Survey data across 60+ countries, this study finds that "
                 "subjective economic perception — not objective indicators like GDP or unemployment — "
-                "is the only statistically significant predictor of satisfaction with democracy.",
-    dataset="World Values Survey, World Bank, V-Dem — 88,499 respondents",
+                "is the only statistically significant predictor of satisfaction with democracy. "
+                "The vibes, it turns out, win.",
+    dataset="World Values Survey Wave 7 (2017-2022), World Bank, V-Dem Institute — 88,499 respondents across 60+ countries",
     questions=[
-        "Do people judge democracy based on GDP or perception?",
-        "Does democracy quality predict satisfaction?",
-        "Which individual factors matter?"
+        "Do people judge democracy based on GDP, or how they personally feel about the economy?",
+        "Does democracy quality actually predict satisfaction with democracy?",
+        "Which individual factors (age, education, income) matter for democratic satisfaction?"
     ],
     insights=[
-        "Economic perception is the only significant predictor",
-        "GDP and unemployment show no significant effect",
-        "Older and more educated people report higher satisfaction",
-        "Perception drives democratic legitimacy"
+        "Economic perception is the only statistically significant predictor across all three models",
+        "GDP, unemployment, and democracy quality score show no significant effect once perception is controlled",
+        "Older and more educated people report higher satisfaction with democracy",
+        "The perception gap — not the numbers — is what drives democratic legitimacy"
     ],
-    tools=["Python", "pandas", "OLS Regression"],
+    tools=["Python", "pandas", "OLS Regression", "World Values Survey", "World Bank Data", "V-Dem"],
+    # passing image paths with captions — rendered by VisualProject.render_markdown()
     image_paths=[
-        {"path": "images/dem_satisfaction_dist.png", "caption": "Distribution of Satisfaction"},
-        {"path": "images/dem_econ_perception_dist.png", "caption": "Economic Perception Distribution"},
-        {"path": "images/dem_econ_perception_scatter.png", "caption": "Perception vs Satisfaction"},
-        {"path": "images/dem_gdp_scatter.png", "caption": "GDP vs Satisfaction"},
-        {"path": "images/dem_correlation_matrix.png", "caption": "Correlation Matrix"},
+        {"path": "images/dem_satisfaction_dist.png", "caption": "Distribution of Satisfaction with Democracy"},
+        {"path": "images/dem_econ_perception_dist.png", "caption": "Distribution of Economic Perception across countries"},
+        {"path": "images/dem_econ_perception_scatter.png", "caption": "Economic Perception vs Satisfaction with Democracy"},
+        {"path": "images/dem_gdp_scatter.png", "caption": "GDP vs Satisfaction with Democracy"},
+        {"path": "images/dem_correlation_matrix.png", "caption": "Correlation Matrix of Key Variables"},
     ]
 ))

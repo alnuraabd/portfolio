@@ -1,100 +1,112 @@
-# models.py
 
+# importing ABC and abstractmethod to enable abstract base class pattern
 from abc import ABC, abstractmethod
 
 
-# defining abstract base class for all projects
 class Project(ABC):
-    """Abstract base class for all portfolio projects."""
+    """
+    Abstract base class for all portfolio projects.
 
-    # tracking number of created projects (class variable)
+    Demonstrates:
+    - Abstraction: cannot be instantiated directly, only through subclasses
+    - Encapsulation: attributes stored as private (_attr) with public @property accessors
+    - Polymorphism: render_markdown() is defined differently in each subclass
+    """
+
+    # class variable — shared across ALL instances of Project and its subclasses
+    # tracking how many project objects have been created in total
     project_count = 0
 
-    # initializing project with basic attributes
     def __init__(self, title, description, dataset=None, questions=None, insights=None, tools=None):
+        # incrementing class variable every time a new project is created
         Project.project_count += 1
+
+        # using setters here so validation runs on init too (encapsulation)
         self.title = title
         self.description = description
+
+        # storing optional fields as private instance variables
         self._dataset = dataset
         self._questions = questions or []
         self._insights = insights or []
         self._tools = tools or []
 
+    # --- properties with validation (encapsulation) ---
+    # exposing private attributes through @property with type and value checks
 
-
-    # properties with validation
-
-    # getting and validating title
     @property
     def title(self):
         return self._title
 
     @title.setter
     def title(self, value):
-        # ensuring title is non-empty string
+        # validating title is a non-empty string
         if not value or not isinstance(value, str):
             raise ValueError("Title must be a non-empty string")
         self._title = value.strip()
 
-    # getting and validating description
     @property
     def description(self):
         return self._description
 
     @description.setter
     def description(self, value):
-        # ensuring description is non-empty string
+        # validating description is a non-empty string
         if not value or not isinstance(value, str):
             raise ValueError("Description must be a non-empty string")
         self._description = value.strip()
 
-    # returning tools list
     @property
     def tools(self):
+        # exposing as read-only — no setter, set at construction time only
         return self._tools
 
-    # returning questions list
     @property
     def questions(self):
         return self._questions
 
-    # returning insights list
     @property
     def insights(self):
         return self._insights
 
-    # returning dataset info
     @property
     def dataset(self):
         return self._dataset
 
+    # --- dunder methods ---
 
-    # dunder methods
-
-
-    # returning readable string for users
     def __str__(self):
+        # returning human-readable string — used when print() is called on a project
         return f"{self.__class__.__name__}: {self.title}"
 
-    # returning debug-friendly representation
     def __repr__(self):
+        # returning developer representation — used in debugging and logs
         return f"{self.__class__.__name__}(title='{self.title}')"
 
+    # --- abstract method (abstraction + polymorphism) ---
 
-    # abstract method
-
-
-    # forcing subclasses to implement rendering logic
     @abstractmethod
     def render_markdown(self):
+        """
+        Rendering the project as a markdown string.
+
+        Marked @abstractmethod — every subclass MUST implement this.
+        Each subclass implements it differently (polymorphism).
+        Python raises TypeError if a subclass forgets to implement it.
+        """
         pass
 
+    # --- shared protected helper ---
 
-    # shared rendering logic
-
-
-    # building common markdown structure for all projects
     def _render_base_markdown(self):
+        """
+        Shared markdown rendering logic for all subclasses.
+
+        Prefixed with _ to indicate internal/subclass use only.
+        Subclasses calling this via self._render_base_markdown() to reuse
+        shared structure without duplicating code (inheritance + code reuse).
+        """
+        # building base div with shared project info
         md = f"""<div style="background:#f8f9fa; padding:25px; margin-bottom:40px; border-radius:12px;">
 
 ## {self.title}
@@ -102,24 +114,20 @@ class Project(ABC):
 #### Overview
 {self.description}
 """
-
-        # adding dataset section if exists
+        # appending optional sections only if data exists
         if self.dataset:
             md += f"\n#### Dataset\n{self.dataset}\n"
 
-        # adding questions list
         if self.questions:
             md += "\n#### Key Questions\n"
             for q in self.questions:
                 md += f"- {q}\n"
 
-        # adding insights list
         if self.insights:
             md += "\n#### Key Insights\n"
             for i in self.insights:
                 md += f"- {i}\n"
 
-        # adding tools list
         if self.tools:
             md += "\n#### Tools Used\n"
             for t in self.tools:
@@ -128,30 +136,33 @@ class Project(ABC):
         return md
 
 
-# defining dashboard project (inherits from Project)
 class DashboardProject(Project):
-    """Project with embedded dashboard."""
+    """
+    A project that includes an embedded interactive dashboard.
 
-    # initializing with dashboard link
+    Inheriting from Project and extending with dashboard_link property.
+    render_markdown() calls _render_base_markdown() then appends iframe.
+    """
+
     def __init__(self, title, description, dataset, questions, insights, tools, dashboard_link):
+        # calling parent __init__ to reuse shared initialisation logic
         super().__init__(title, description, dataset, questions, insights, tools)
         self.dashboard_link = dashboard_link
 
-    # validating dashboard link
     @property
     def dashboard_link(self):
         return self._dashboard_link
 
     @dashboard_link.setter
     def dashboard_link(self, value):
+        # validating dashboard link is a non-empty string
         if not value or not isinstance(value, str):
             raise ValueError("Dashboard link must be a non-empty string")
         self._dashboard_link = value.strip()
 
-    # rendering project with embedded iframe
     def render_markdown(self):
+        # calling shared base rendering first, then appending dashboard iframe
         md = self._render_base_markdown()
-
         md += f"""
 #### Interactive Dashboard
 
@@ -170,40 +181,44 @@ class DashboardProject(Project):
         return md
 
 
-# defining product-focused project
 class ProductProject(Project):
-    """Project describing product solution."""
+    """
+    A project focused on a product or engineering solution.
 
-    # initializing with problem and solution
+    Inheriting from Project and extending with problem and solution fields.
+    render_markdown() builds its own layout — not using _render_base_markdown().
+    """
+
     def __init__(self, title, description, problem, solution):
+        # calling parent __init__ with only title and description
         super().__init__(title, description)
         self.problem = problem
         self.solution = solution
 
-    # validating problem text
     @property
     def problem(self):
         return self._problem
 
     @problem.setter
     def problem(self, value):
+        # validating problem is a non-empty string
         if not value or not isinstance(value, str):
             raise ValueError("Problem must be a non-empty string")
         self._problem = value.strip()
 
-    # validating solution text
     @property
     def solution(self):
         return self._solution
 
     @solution.setter
     def solution(self, value):
+        # validating solution is a non-empty string
         if not value or not isinstance(value, str):
             raise ValueError("Solution must be a non-empty string")
         self._solution = value.strip()
 
-    # rendering product project block
     def render_markdown(self):
+        # building its own markdown layout with problem/solution structure
         md = f"""<div style="background:#f8f9fa; padding:25px; margin-bottom:40px; border-radius:12px;">
 
 ## {self.title}
@@ -222,27 +237,31 @@ class ProductProject(Project):
         return md
 
 
-# defining visual project with static images
 class VisualProject(Project):
-    """Project showing visual outputs."""
+    """
+    A project showcasing data analysis through static visualizations.
 
-    # initializing with list of images
+    Inheriting from Project and extending with image_paths for chart display.
+    render_markdown() calls _render_base_markdown() then appends images.
+    """
+
     def __init__(self, title, description, dataset, questions, insights, tools, image_paths):
+        # calling parent __init__ to reuse shared initialisation logic
         super().__init__(title, description, dataset, questions, insights, tools)
+        # storing image paths as private instance variable
         self._image_paths = image_paths
 
-    # returning image list
     @property
     def image_paths(self):
+        # exposing as read-only — no setter needed
         return self._image_paths
 
-    # rendering images with captions
     def render_markdown(self):
+        # calling shared base rendering first, then appending visualization images
         md = self._render_base_markdown()
 
         md += "\n#### Visualizations\n"
-
-        # looping through images and adding them
+        # iterating over image paths and rendering each with caption
         for img in self._image_paths:
             md += f'\n<img src="{img["path"]}" alt="{img["caption"]}" style="width:100%; border-radius:8px; margin-bottom:12px;">\n'
             md += f'<p style="color:#888; font-size:0.85em; margin-top:-8px;">{img["caption"]}</p>\n'

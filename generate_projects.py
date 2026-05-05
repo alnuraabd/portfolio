@@ -1,14 +1,8 @@
-# importing project list
-from data import projects
+# generate_projects.py
+# importing portfolio container from data.py
+from data import portfolio
 
-# opening file for writing generated content
-with open("generated_projects.qmd", "w") as f:
-
-    # writing page title
-    f.write("# Projects\n\n")
-
-    # looping through all projects
-    for project in projects:
-
-        # rendering each project and writing to file
-        f.write(project.render_markdown())
+# calling export_qmd() on the Portfolio instance
+# this method encapsulates all file-writing logic inside the Portfolio class
+# each project's render_markdown() is called differently depending on type (polymorphism)
+portfolio.export_qmd("generated_projects.qmd")

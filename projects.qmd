@@ -8,16 +8,17 @@ execute:
   echo: false
 ---
 
-# rendering projects dynamically using python
-```{python}
-# importing portfolio object containing all projects
+````{python}
+# importing portfolio container from data.py
 from data import portfolio
 
-# importing tools to render markdown properly
+# importing display tools for rendering markdown in quarto
 from IPython.display import Markdown, display
 
-# looping through each project in portfolio
+# iterating over portfolio — works because Portfolio implements __iter__
+# calling render_markdown() on each project — polymorphism in action
+# each subclass renders differently: DashboardProject adds iframe, VisualProject adds images
 for project in portfolio:
-    
-    # calling render method and displaying formatted output
     display(Markdown(project.render_markdown()))
+````
+
