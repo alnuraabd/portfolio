@@ -2,22 +2,36 @@
   {
     "objectID": "about.html",
     "href": "about.html",
-    "title": "About Me",
+    "title": "About",
     "section": "",
-    "text": "About Me\nI am a Data Science student."
+    "text": "About Me\n\n\n\nThe person behind the horse photo.\n\n\n\n\nWho I Am\n\n\n\nI’m Alnura, a 3rd year Data Science and Society student at Central European University, originally from Kazakhstan. I ended up in data science because it turns out numbers can be applied to pretty much everything — politics, behaviour, games, economies, people’s feelings about democracy. That’s the appeal. You pick a question that matters and data gives you a way to actually look at it.\n\n\n\nWhen I’m not doing that, I’m cooking something that may or may not have followed the recipe, and thinking about horses.\n\n\n\n\nWhat I Work With\n\n\n\n\n\n&lt;strong&gt;Languages&lt;/strong&gt;\n&lt;p style=\"color:#555; margin-top: 8px;\"&gt;Python, SQL, R&lt;/p&gt;\n\n\n\n&lt;strong&gt;Data & Analysis&lt;/strong&gt;\n&lt;p style=\"color:#555; margin-top: 8px;\"&gt;pandas, NumPy&lt;/p&gt;\n\n\n\n&lt;strong&gt;Visualisation & BI&lt;/strong&gt;\n&lt;p style=\"color:#555; margin-top: 8px;\"&gt;Tableau, Matplotlib, Seaborn, Yandex DataLens&lt;/p&gt;\n\n\n\n&lt;strong&gt;Tools&lt;/strong&gt;\n&lt;p style=\"color:#555; margin-top: 8px;\"&gt;Excel, Google Sheets, PostgreSQL&lt;/p&gt;\n\n\n\n\n\nWhere I’m Headed\n\n\n\nI’m interested in decision science — the intersection of data, behaviour, and how people and organisations actually make choices. The kind of work where the output isn’t just a chart but something that changes what someone decides to do next.\n\n\n\nStill figuring out the exact shape of it, but the direction is clear enough."
   },
   {
     "objectID": "projects.html",
     "href": "projects.html",
     "title": "Projects",
     "section": "",
-    "text": "Projects\nMy projects will be here."
+    "text": "rendering projects dynamically using python\n\n\nimporting portfolio object containing all projects\nfrom data import portfolio\n\n\nimporting tools to render markdown properly\nfrom IPython.display import Markdown, display\n\n\nlooping through each project in portfolio\nfor project in portfolio:\n# calling render method and displaying formatted output\ndisplay(Markdown(project.render_markdown()))"
+  },
+  {
+    "objectID": "projects.html#computer-games-industry-analysis",
+    "href": "projects.html#computer-games-industry-analysis",
+    "title": "Projects",
+    "section": "",
+    "text": "Analysis of gaming trends using Steam data\n\n\n\n70,000+ games (2013–2025)\n\n\n\n\nHow do real-world events affect gaming activity?\nWhat caused the rise of indie games?\nDo violent games follow real-world trends?\n\n\n\n\n\nGaming activity increased during COVID-19\nIndie games grew after Steam policy changes\nViolent games remain consistently popular\n\n\n\n\n\nTableau\nPython"
+  },
+  {
+    "objectID": "projects.html#democracy-and-economic-perception",
+    "href": "projects.html#democracy-and-economic-perception",
+    "title": "Projects",
+    "section": "",
+    "text": "Do people judge democracy by GDP numbers or by how their wallet actually feels? Using World Values Survey data across 60+ countries, this study finds that subjective economic perception — not objective indicators like GDP or unemployment — is the only statistically significant predictor of satisfaction with democracy. The vibes, it turns out, win.\n\n\n\nWorld Values Survey Wave 7 (2017-2022), World Bank, V-Dem Institute — 88,499 respondents across 60+ countries\n\n\n\n\nDo people judge democracy based on GDP, or how they personally feel about the economy?\nDoes democracy quality actually predict satisfaction with democracy?\nWhich individual factors (age, education, income) matter for democratic satisfaction?\n\n\n\n\n\nEconomic perception is the only statistically significant predictor across all three models\nGDP, unemployment, and democracy quality score show no significant effect once perception is controlled\nOlder and more educated people report higher satisfaction with democracy\nThe perception gap — not the numbers — is what drives democratic legitimacy\n\n\n\n\n\nPython\npandas\nOLS Regression\nWorld Values Survey\nWorld Bank Data\nV-Dem\n\n\n\n\n\n\nDistribution of Satisfaction with Democracy\n\n\n\nDistribution of Economic Perception across countries\n\n\n\nEconomic Perception vs Satisfaction with Democracy\n\n\n\nGDP vs Satisfaction with Democracy\n\n\n\nCorrelation Matrix of Key Variables"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Welcome",
+    "title": "Home",
     "section": "",
-    "text": "Welcome\nHi, I am Alnura.\nThis is my data science portfolio."
+    "text": "Hi, I’m Alnura\n\n\n\n3rd year Data Science student at CEU. I wrangle data, cook questionable meals, and spiritually identify as a horse. Welcome to my corner of the internet.\n\n\n\n\n\n\n\n\n\n\n&lt;div style=\"font-size: 0.75em; color: #888;\"&gt;NOW PLAYING&lt;/div&gt;\n&lt;div style=\"font-size: 1.1em; font-weight: bold;\"&gt;Waka Waka&lt;/div&gt;\n&lt;div style=\"font-size: 0.85em; color: #aaa;\"&gt;Shakira&lt;/div&gt;\n\n\n\n&lt;div id=\"progress-bar\" style=\"background: linear-gradient(90deg, #a78bfa, #ec4899); width: 0%; height: 100%; border-radius: 999px;\"&gt;&lt;/div&gt;\n\n\n\n&lt;span id=\"current-time\"&gt;0:00&lt;/span&gt;\n&lt;span&gt;3:33&lt;/span&gt;\n\n\n\n&lt;button onclick=\"restartSong()\"&gt;⏮&lt;/button&gt;\n&lt;button id=\"play-btn\" onclick=\"togglePlay()\"&gt;▶&lt;/button&gt;\n&lt;button onclick=\"muteSong()\" id=\"mute-btn\"&gt;🔊&lt;/button&gt;\n\n\n\n\n\nWhat I Do\n\n\n\n\n&lt;h3&gt;Python&lt;/h3&gt;\n&lt;p&gt;Using python for data work and analysis.&lt;/p&gt;\n\n\n\n&lt;h3&gt;Data Visualization&lt;/h3&gt;\n&lt;p&gt;Creating charts and dashboards.&lt;/p&gt;\n\n\n\n&lt;h3&gt;Cooking&lt;/h3&gt;\n&lt;p&gt;Experimenting and explaining results.&lt;/p&gt;\n\n\n\n\n\nFeatured Projects\n\n\n\n\n&lt;strong&gt;Computer Games Industry Analysis&lt;/strong&gt;\n&lt;p&gt;Analyzing gaming trends.&lt;/p&gt;\n&lt;a href=\"projects.qmd\"&gt;View Project&lt;/a&gt;\n\n\n\n&lt;strong&gt;Democracy and Economic Perception&lt;/strong&gt;\n&lt;p&gt;Analyzing perception vs economy.&lt;/p&gt;\n&lt;a href=\"projects.qmd\"&gt;View Project&lt;/a&gt;"
   }
 ]

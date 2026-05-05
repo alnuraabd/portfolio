@@ -1,3 +1,23 @@
-# Projects
+---
+title: "Projects"
+format:
+  html:
+    theme: cosmo
+    page-layout: full
+execute:
+  echo: false
+---
 
-My projects will be here.
+# rendering projects dynamically using python
+```{python}
+# importing portfolio object containing all projects
+from data import portfolio
+
+# importing tools to render markdown properly
+from IPython.display import Markdown, display
+
+# looping through each project in portfolio
+for project in portfolio:
+    
+    # calling render method and displaying formatted output
+    display(Markdown(project.render_markdown()))
