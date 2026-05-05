@@ -1,88 +1,110 @@
-/* typography */
+/* Typography*/
+
+/* setting base font and line height for all body text */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #2d2d2d;
-    line-height: 1.7;
-  }
-  
-  h1, h2, h3 {
-    font-weight: 700;
-    color: #1a1a2e;
-  }
-  
-  a {
-    color: #6c63ff;
-    text-decoration: none;
-  }
-  
-  a:hover {
-    text-decoration: underline;
-    color: #4b44cc;
-  }
-  
-  /* navbar */
-  .navbar {
-    border-bottom: 2px solid #f0f0f0;
-    padding: 12px 0;
-  }
-  
-  .navbar-brand {
-    font-weight: 700;
-    font-size: 1.1em;
-    color: #1a1a2e !important;
-  }
-  
-  .navbar .nav-link {
-    color: #555 !important;
-    font-size: 0.95em;
-    margin: 0 6px;
-    transition: color 0.2s;
-  }
-  
-  .navbar .nav-link:hover {
-    color: #6c63ff !important;
-  }
-  
-  /* cards */
-  .project-card {
-    background: #f8f9fa;
-    padding: 25px;
-    margin-bottom: 40px;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  
-  .project-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-  }
-  
-  /* images */
-  img {
-    max-width: 100%;
-    border-radius: 8px;
-  }
-  
-  /* sections */
-  hr {
-    border: none;
-    border-top: 1px solid #ececec;
-    margin: 40px 0;
-  }
-  
-  /* visualization captions */
-  .viz-caption {
-    color: #888;
-    font-size: 0.85em;
-    margin-top: -8px;
-    margin-bottom: 20px;
-  }
-  
-  /* footer */
-  .page-footer {
-    border-top: 1px solid #ececec;
-    padding-top: 20px;
-    color: #aaa;
-    font-size: 0.85em;
-  }
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #2d2d2d;
+  line-height: 1.7;
+}
+
+/* making headings bold and dark */
+h1, h2, h3 {
+  font-weight: 700;
+  color: #1a1a2e;
+}
+
+/* styling links with purple to match music player gradient */
+a {
+  color: #6c63ff;
+  text-decoration: none;
+}
+
+/* adding underline on hover for accessibility */
+a:hover {
+  text-decoration: underline;
+  color: #4b44cc;
+}
+
+/* Navbar*/
+
+/* adding subtle bottom border to separate navbar from content */
+.navbar {
+  border-bottom: 2px solid #f0f0f0;
+  padding: 12px 0;
+}
+
+/* making navbar brand bold and dark */
+.navbar-brand {
+  font-weight: 700;
+  font-size: 1.1em;
+  color: #1a1a2e !important;
+}
+
+/* styling navbar links with smooth color transition on hover */
+.navbar .nav-link {
+  color: #555 !important;
+  font-size: 0.95em;
+  margin: 0 6px;
+  transition: color 0.2s;
+}
+
+/* turning navbar links purple on hover — matching site accent color */
+.navbar .nav-link:hover {
+  color: #6c63ff !important;
+}
+
+/* cards */
+
+/* styling project and skill cards with subtle shadow */
+.project-card {
+  background: #f8f9fa;
+  padding: 25px;
+  margin-bottom: 40px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  /* adding smooth transition for hover effect */
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* lifting card slightly on hover for interactive feel */
+.project-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+}
+
+/* Images*/
+
+/* preventing images from overflowing their containers */
+img {
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+/* Sections*/
+
+/* replacing default hr with lighter, thinner divider */
+hr {
+  border: none;
+  border-top: 1px solid #ececec;
+  margin: 40px 0;
+}
+
+/* Visualization captions*/
+
+/* styling captions below project chart images */
+.viz-caption {
+  color: #888;
+  font-size: 0.85em;
+  margin-top: -8px;
+  margin-bottom: 20px;
+}
+
+/* Footer */
+
+/* styling page footer with light top border and muted text */
+.page-footer {
+  border-top: 1px solid #ececec;
+  padding-top: 20px;
+  color: #aaa;
+  font-size: 0.85em;
+}

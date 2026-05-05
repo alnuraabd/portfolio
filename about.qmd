@@ -86,13 +86,7 @@ Still figuring out the exact shape of it, but the direction is clear enough.
 
 <hr>
 
-<!-- rendering contact links -->
-<h2>Get In Touch</h2>
 
-<p>
-  <a href="https://linkedin.com/in/alnura-abdyrova">LinkedIn</a> &nbsp;·&nbsp;
-  <a href="https://github.com/alnuraabd">GitHub</a>
-</p>
 
 </div>
 ```

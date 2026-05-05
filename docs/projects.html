@@ -138,25 +138,117 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="rendering-projects-dynamically-using-python" class="level1">
-<h1>rendering projects dynamically using python</h1>
+<div id="f13266ab" class="cell" data-execution_count="1">
+<div class="cell-output cell-output-display cell-output-markdown">
+<section id="computer-games-industry-analysis" class="level2" style="background:#f8f9fa; padding:25px; margin-bottom:40px; border-radius:12px;">
+<h2 class="anchored" data-anchor-id="computer-games-industry-analysis">Computer Games Industry Analysis</h2>
+<section id="overview" class="level4">
+<h4 class="anchored" data-anchor-id="overview">Overview</h4>
+<p>Analysis of gaming trends using Steam data</p>
 </section>
-<section id="importing-portfolio-object-containing-all-projects" class="level1">
-<h1>importing portfolio object containing all projects</h1>
-<p>from data import portfolio</p>
+<section id="dataset" class="level4">
+<h4 class="anchored" data-anchor-id="dataset">Dataset</h4>
+<p>70,000+ games (2013–2025)</p>
 </section>
-<section id="importing-tools-to-render-markdown-properly" class="level1">
-<h1>importing tools to render markdown properly</h1>
-<p>from IPython.display import Markdown, display</p>
+<section id="key-questions" class="level4">
+<h4 class="anchored" data-anchor-id="key-questions">Key Questions</h4>
+<ul>
+<li>How do real-world events affect gaming activity?</li>
+<li>What caused the rise of indie games?</li>
+<li>Do violent games follow real-world trends?</li>
+</ul>
 </section>
-<section id="looping-through-each-project-in-portfolio" class="level1">
-<h1>looping through each project in portfolio</h1>
-<p>for project in portfolio:</p>
-<pre><code># calling render method and displaying formatted output
-display(Markdown(project.render_markdown()))</code></pre>
+<section id="key-insights" class="level4">
+<h4 class="anchored" data-anchor-id="key-insights">Key Insights</h4>
+<ul>
+<li>Gaming activity increased during COVID-19</li>
+<li>Indie games grew after Steam policy changes</li>
+<li>Violent games remain consistently popular</li>
+</ul>
+</section>
+<section id="tools-used" class="level4">
+<h4 class="anchored" data-anchor-id="tools-used">Tools Used</h4>
+<ul>
+<li>Tableau</li>
+<li>Python</li>
+</ul>
+</section>
+<section id="interactive-dashboard" class="level4">
+<h4 class="anchored" data-anchor-id="interactive-dashboard">Interactive Dashboard</h4>
+<iframe src="https://public.tableau.com/views/Book1_17653119185000/Dashboard3?:showVizHome=no&amp;:embed=true" width="100%" height="750" style="border: none;">
+</iframe>
+</section>
+</section>
+<hr>
+</div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<section id="democracy-and-economic-perception" class="level2" style="background:#f8f9fa; padding:25px; margin-bottom:40px; border-radius:12px;">
+<h2 class="anchored" data-anchor-id="democracy-and-economic-perception">Democracy and Economic Perception</h2>
+<section id="overview-1" class="level4">
+<h4 class="anchored" data-anchor-id="overview-1">Overview</h4>
+<p>Do people judge democracy by GDP numbers or by how their wallet actually feels? Using World Values Survey data across 60+ countries, this study finds that subjective economic perception — not objective indicators like GDP or unemployment — is the only statistically significant predictor of satisfaction with democracy. The vibes, it turns out, win.</p>
+</section>
+<section id="dataset-1" class="level4">
+<h4 class="anchored" data-anchor-id="dataset-1">Dataset</h4>
+<p>World Values Survey Wave 7 (2017-2022), World Bank, V-Dem Institute — 88,499 respondents across 60+ countries</p>
+</section>
+<section id="key-questions-1" class="level4">
+<h4 class="anchored" data-anchor-id="key-questions-1">Key Questions</h4>
+<ul>
+<li>Do people judge democracy based on GDP, or how they personally feel about the economy?</li>
+<li>Does democracy quality actually predict satisfaction with democracy?</li>
+<li>Which individual factors (age, education, income) matter for democratic satisfaction?</li>
+</ul>
+</section>
+<section id="key-insights-1" class="level4">
+<h4 class="anchored" data-anchor-id="key-insights-1">Key Insights</h4>
+<ul>
+<li>Economic perception is the only statistically significant predictor across all three models</li>
+<li>GDP, unemployment, and democracy quality score show no significant effect once perception is controlled</li>
+<li>Older and more educated people report higher satisfaction with democracy</li>
+<li>The perception gap — not the numbers — is what drives democratic legitimacy</li>
+</ul>
+</section>
+<section id="tools-used-1" class="level4">
+<h4 class="anchored" data-anchor-id="tools-used-1">Tools Used</h4>
+<ul>
+<li>Python</li>
+<li>pandas</li>
+<li>OLS Regression</li>
+<li>World Values Survey</li>
+<li>World Bank Data</li>
+<li>V-Dem</li>
+</ul>
+</section>
+<section id="visualizations" class="level4">
+<h4 class="anchored" data-anchor-id="visualizations">Visualizations</h4>
+<img src="images/dem_satisfaction_dist.png" alt="Distribution of Satisfaction with Democracy" style="width:100%; border-radius:8px; margin-bottom:12px;">
+<p style="color:#888; font-size:0.85em; margin-top:-8px;">
+Distribution of Satisfaction with Democracy
+</p>
+<img src="images/dem_econ_perception_dist.png" alt="Distribution of Economic Perception across countries" style="width:100%; border-radius:8px; margin-bottom:12px;">
+<p style="color:#888; font-size:0.85em; margin-top:-8px;">
+Distribution of Economic Perception across countries
+</p>
+<img src="images/dem_econ_perception_scatter.png" alt="Economic Perception vs Satisfaction with Democracy" style="width:100%; border-radius:8px; margin-bottom:12px;">
+<p style="color:#888; font-size:0.85em; margin-top:-8px;">
+Economic Perception vs Satisfaction with Democracy
+</p>
+<img src="images/dem_gdp_scatter.png" alt="GDP vs Satisfaction with Democracy" style="width:100%; border-radius:8px; margin-bottom:12px;">
+<p style="color:#888; font-size:0.85em; margin-top:-8px;">
+GDP vs Satisfaction with Democracy
+</p>
+<img src="images/dem_correlation_matrix.png" alt="Correlation Matrix of Key Variables" style="width:100%; border-radius:8px; margin-bottom:12px;">
+<p style="color:#888; font-size:0.85em; margin-top:-8px;">
+Correlation Matrix of Key Variables
+</p>
+</section>
+</section>
+<hr>
+</div>
+</div>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

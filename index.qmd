@@ -125,9 +125,6 @@ and spiritually identify as a horse. Welcome to my corner of the internet.
 
 <hr>
 
-<!-- rendering contact links -->
-<p>Find me here: <a href="https://linkedin.com/in/alnura-abdyrova">LinkedIn</a> · <a href="https://github.com/alnuraabd">GitHub</a></p>
-
 <script>
   // initializing player state variables
   var player;
