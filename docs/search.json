@@ -32,7 +32,7 @@
     "href": "projects.html#interactive-data-explorer",
     "title": "Projects",
     "section": "Interactive Data Explorer",
-    "text": "Interactive Data Explorer\nExplore different mathematical functions interactively — built with Python Shiny and hosted on Posit Connect Cloud."
+    "text": "Interactive Data Explorer\nExplore how economic indicators relate to satisfaction with democracy across countries — built with Python Shiny and hosted on Posit Connect Cloud."
   },
   {
     "objectID": "index.html",
