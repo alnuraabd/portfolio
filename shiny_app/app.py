@@ -1,121 +1,121 @@
 # app.py
-from shiny import App, ui, render
+import pandas as pd
+import numpy as np
 import matplotlib.pyplot as plt
+from shiny import App, ui, render
+
+# loading democracy dataset from csv
+df = pd.read_csv("merged_clean.csv")
 
 
-class DataProcessor:
-    """Generates data for a given number of points."""
+class DataLoader:
+    """loading and validating the democracy dataset."""
 
-    def __init__(self, n, mode="square"):
-        # storing n and mode via setters so validation runs immediately
-        self.n = n
-        self.mode = mode
+    # class variable — storing column display names shared across all instances
+    VARIABLE_LABELS = {
+        "econ_percep": "Economic Perception",
+        "log_gdp": "Log GDP per Capita",
+        "unemp_mean": "Unemployment Rate",
+        "democracy": "Democracy Score"
+    }
+
+    def __init__(self, dataframe):
+        # storing dataframe as private instance variable
+        self._df = dataframe
 
     @property
-    def n(self):
-        return self._n
+    def df(self):
+        # exposing dataframe as read-only property
+        return self._df
 
-    @n.setter
-    def n(self, value):
-        # ensuring n is a valid integer >= 2
-        if not isinstance(value, int) or value < 2:
-            raise ValueError("n must be an integer >= 2")
-        self._n = value
-
-    @property
-    def mode(self):
-        return self._mode
-
-    @mode.setter
-    def mode(self, value):
-        # restricting mode to known function types only
-        allowed = ("square", "linear", "cubic")
-        if value not in allowed:
-            raise ValueError(f"mode must be one of {allowed}")
-        self._mode = value
-
-    def generate_data(self):
-        """Generate x and y based on the selected mode."""
-        # computing y values differently depending on selected mode (polymorphic behaviour)
-        x = list(range(self._n))
-        if self._mode == "square":
-            y = [i ** 2 for i in x]
-        elif self._mode == "linear":
-            y = [i * 2 for i in x]
-        elif self._mode == "cubic":
-            y = [i ** 3 for i in x]
-        return x, y
+    def get_columns(self):
+        # returning only columns that actually exist in the dataset
+        return {k: v for k, v in self.VARIABLE_LABELS.items() if k in self._df.columns}
 
 
 class Visualizer:
-    """Handles all plot rendering with configurable style."""
+    """handling all plot rendering with configurable style."""
 
-    # defining class-level defaults shared across all Visualizer instances
+    # class-level defaults shared across all Visualizer instances
     DEFAULT_COLOR = "steelblue"
-    DEFAULT_LINEWIDTH = 2
+    DEFAULT_ALPHA = 0.6
 
-    def __init__(self, title="Plot", xlabel="X", ylabel="Y",
-                 color=None, linewidth=None):
+    def __init__(self, color=None, alpha=None):
         # storing plot configuration as private instance variables
-        self._title = title
-        self._xlabel = xlabel
-        self._ylabel = ylabel
-        # falling back to class-level defaults if no value is passed
         self._color = color or self.DEFAULT_COLOR
-        self._linewidth = linewidth or self.DEFAULT_LINEWIDTH
+        self._alpha = alpha or self.DEFAULT_ALPHA
 
-    @property
-    def title(self):
-        # exposing private attribute as read-only property
-        return self._title
+    def scatter(self, df, x_col, y_col, x_label, y_label):
+        """rendering scatter plot with trend line."""
+        fig, ax = plt.subplots(figsize=(8, 5))
 
-    @property
-    def xlabel(self):
-        return self._xlabel
+        # plotting scatter points
+        ax.scatter(df[x_col], df[y_col],
+                   color=self._color,
+                   alpha=self._alpha,
+                   s=60)
 
-    @property
-    def ylabel(self):
-        return self._ylabel
+        # adding trend line using numpy polyfit
+        z = df[[x_col, y_col]].dropna()
+        if len(z) > 1:
+            m, b = np.polyfit(z[x_col], z[y_col], 1)
+            ax.plot(z[x_col], m * z[x_col] + b,
+                    color="navy", linewidth=1.5)
 
-    def plot(self, x, y):
-        """Render the plot using stored configuration."""
-        # using stored instance state to configure the plot
-        fig, ax = plt.subplots()
-        ax.plot(x, y,
+        ax.set_xlabel(x_label)
+        ax.set_ylabel(y_label)
+        ax.set_title(f"{x_label} vs Satisfaction with Democracy")
+        ax.grid(True, alpha=0.3)
+        return fig
+
+    def histogram(self, df, col, label):
+        """rendering histogram for a single variable."""
+        fig, ax = plt.subplots(figsize=(8, 5))
+        ax.hist(df[col].dropna(), bins=20,
                 color=self._color,
-                linewidth=self._linewidth)
-        ax.set_xlabel(self._xlabel)
-        ax.set_ylabel(self._ylabel)
-        ax.set_title(self._title)
+                alpha=self._alpha,
+                edgecolor="white")
+        ax.set_xlabel(label)
+        ax.set_ylabel("Count")
+        ax.set_title(f"Distribution of {label}")
         ax.grid(True, alpha=0.3)
         return fig
 
 
-# mapping mode keys to display labels and y-axis titles
-MODE_CONFIG = {
-    "square": {"label": "Square (Y = X²)", "ylabel": "Y = X²"},
-    "linear": {"label": "Linear (Y = 2X)",  "ylabel": "Y = 2X"},
-    "cubic":  {"label": "Cubic (Y = X³)",   "ylabel": "Y = X³"},
-}
+# initializing data loader 
+loader = DataLoader(df)
+available_vars = loader.get_columns()
 
-
+#UI
 app_ui = ui.page_fluid(
-    ui.h2("Interactive Data Explorer"),
-    ui.p("Use the controls below to explore different mathematical relationships."),
+    ui.h2("Democracy & Economic Perception Explorer"),
+    ui.p("Explore how economic indicators relate to satisfaction with democracy across countries."),
     ui.row(
         ui.column(4,
-            ui.input_slider("n", "Number of points", min=10, max=200, value=50),
             ui.input_select(
-                "mode",
-                "Function type",
-                # building choices dynamically from MODE_CONFIG
-                choices={k: v["label"] for k, v in MODE_CONFIG.items()},
-                selected="square"
+                "x_var",
+                "Select variable",
+                choices=available_vars,
+                selected="econ_percep"
+            ),
+            ui.input_select(
+                "plot_type",
+                "Plot type",
+                choices={
+                    "scatter": "Scatter vs Satisfaction",
+                    "histogram": "Distribution"
+                },
+                selected="scatter"
             ),
             ui.input_select(
                 "color",
-                "Line color",
-                choices={"steelblue": "Blue", "tomato": "Red", "seagreen": "Green"},
+                "Color",
+                choices={
+                    "steelblue": "Blue",
+                    "tomato": "Red",
+                    "seagreen": "Green",
+                    "mediumpurple": "Purple"
+                },
                 selected="steelblue"
             ),
         ),
@@ -125,28 +125,25 @@ app_ui = ui.page_fluid(
     )
 )
 
-
-
+# Server 
 def server(input, output, session):
     @output
     @render.plot
     def plot():
-        mode = input.mode()
+        x_col = input.x_var()
         color = input.color()
+        x_label = available_vars[x_col]
 
-        # creating a new DataProcessor on each render with current input values
-        processor = DataProcessor(n=input.n(), mode=mode)
-        x, y = processor.generate_data()
+        # creating Visualizer with selected color
+        viz = Visualizer(color=color)
 
-        # creating a Visualizer with config pulled from MODE_CONFIG
-        viz = Visualizer(
-            title=MODE_CONFIG[mode]["label"],
-            xlabel="X",
-            ylabel=MODE_CONFIG[mode]["ylabel"],
-            color=color,
-            linewidth=2
-        )
-        return viz.plot(x, y)
+        if input.plot_type() == "scatter":
+            # rendering scatter plot against satisfaction with democracy
+            return viz.scatter(loader.df, x_col, "satdem",
+                             x_label, "Satisfaction with Democracy")
+        else:
+            # rendering distribution histogram
+            return viz.histogram(loader.df, x_col, x_label)
 
 
 app = App(app_ui, server)

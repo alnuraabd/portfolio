@@ -1,2 +1,6 @@
+cat > ~/portfolio/shiny_app/requirements.txt << 'EOF'
 shiny
 matplotlib
+pandas
+numpy
+EOF
