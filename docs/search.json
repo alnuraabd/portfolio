@@ -33,5 +33,12 @@
     "title": "Home",
     "section": "",
     "text": "Hi, I'm Alnura\n\n\n\n3rd year Data Science student at CEU. I wrangle data, cook questionable meals,\nand spiritually identify as a horse. Welcome to my corner of the internet.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  \n  \n    NOW PLAYING\n    Waka Waka\n    Shakira\n  \n\n  \n  \n    \n    \n  \n\n  \n  \n    0:00\n    3:33\n  \n\n  \n  \n    \n    ⏮\n    \n    \n      ▶\n    \n    \n    🔊\n  \n\n\n\n\n\n\nWhat I Do\n\n\n\n  \n  \n    Python\n    I use Python the way most people use Google Maps — sometimes I know where I'm going, sometimes I just trust the process and hope for the best.\n  \n\n  \n  \n    Data Visualization\n    Turning spreadsheets into something a human actually wants to look at. Charts, dashboards, the works.\n  \n\n  \n  \n    Cooking\n    Same energy as data work — follow the recipe, improvise halfway through, explain the results confidently regardless of outcome.\n  \n\n\n\n\n\n\nFeatured Projects\n\n\n\n  \n  \n    Computer Games Industry Analysis\n    Exploring 70,000+ Steam games to understand how real-world events shape gaming trends.\n    View Project\n  \n\n  \n  \n    Democracy and Economic Perception\n    Do people judge democracy by GDP numbers or by how their wallet actually feels? Spoiler: the vibes win.\n    View Project"
+  },
+  {
+    "objectID": "projects.html#interactive-data-explorer",
+    "href": "projects.html#interactive-data-explorer",
+    "title": "Projects",
+    "section": "Interactive Data Explorer",
+    "text": "Interactive Data Explorer\nExplore different mathematical functions interactively — built with Python Shiny and hosted on Posit Connect Cloud."
   }
 ]
